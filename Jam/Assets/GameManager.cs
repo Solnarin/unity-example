@@ -13,7 +13,10 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+    public Player_G player;
+
     public int damagePerNote = 100;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,10 +42,12 @@ public class GameManager : MonoBehaviour
     public void NoteHit()
     {
         Debug.Log("Hit On Time");
+        
     }
 
     public void NoteMissed()
     {
         Debug.Log("Missed Note");
+        player.Health -= 5;
     }
 }
