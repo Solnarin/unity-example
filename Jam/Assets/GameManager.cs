@@ -15,16 +15,11 @@ public class GameManager : MonoBehaviour
 
     public Player_G player;
 
-    public int damagePerNote = 100;
-
-
-    // Start is called before the first frame update
     void Start()
     {
         instance = this;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!startPlaying)
@@ -33,7 +28,6 @@ public class GameManager : MonoBehaviour
             {
                 startPlaying = true;
                 theBS.hasStarted = true;
-
                 theMusic.Play();
             }
         }
@@ -41,13 +35,12 @@ public class GameManager : MonoBehaviour
 
     public void NoteHit()
     {
-        Debug.Log("Hit On Time");
-        
+        Debug.Log("OLDU");
     }
 
     public void NoteMissed()
     {
-        Debug.Log("Missed Note");
-        player.Health -= 5;
+        Debug.Log("BASAMADIN");
+        player.Health -= 25;
     }
 }
