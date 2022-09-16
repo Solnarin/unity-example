@@ -188,7 +188,7 @@ public class Enemy_behaviour : MonoBehaviour
         }
         else
         {
-            Debug.Log("Twist");
+            //Debug.Log("Twist");
             rotation.y = 0;
         }
 
