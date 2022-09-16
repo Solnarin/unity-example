@@ -517,6 +517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canBePressed: 0
   keyToPress: 275
+  tracker: 0
 --- !u!212 &350538116
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -660,7 +661,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 57ae641b652a9d44e8ab28ae2d67392b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -839,6 +840,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canBePressed: 0
   keyToPress: 273
+  tracker: 0
 --- !u!212 &480204610
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1156,6 +1158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canBePressed: 0
   keyToPress: 276
+  tracker: 0
 --- !u!58 &732960667
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1420,6 +1423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canBePressed: 0
   keyToPress: 276
+  tracker: 0
 --- !u!212 &1283748730
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1913,6 +1917,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canBePressed: 0
   keyToPress: 274
+  tracker: 0
 --- !u!58 &1898718174
 CircleCollider2D:
   m_ObjectHideFlags: 0
