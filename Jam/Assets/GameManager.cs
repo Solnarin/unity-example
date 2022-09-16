@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public Player_G player;
+    public Boss_G boss;
 
     void Start()
     {
@@ -36,11 +37,12 @@ public class GameManager : MonoBehaviour
     public void NoteHit()
     {
         Debug.Log("OLDU");
+        boss.Health -= 5;
     }
 
     public void NoteMissed()
     {
         Debug.Log("BASAMADIN");
-        player.Health -= 25;
+        player.Health -= 5;
     }
 }
