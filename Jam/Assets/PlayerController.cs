@@ -126,6 +126,19 @@ public class PlayerController : MonoBehaviour
     public float gluttonPowerAmount;
     public float gluttonCooldown;
 
+    //---------------------------------------------------------------------------------------
+
+    [Header("Attack")]
+
+    public bool canAttack;
+    public float attackCooldown;
+
+
+    public Transform attackPoint;
+    public float attackRange;
+    public LayerMask enemyLayers;
+
+
     private void Awake()
     {
         canGlutton = true;
@@ -134,6 +147,7 @@ public class PlayerController : MonoBehaviour
         canGreed = true;
         canJealous = true;
         canArrogance = true;
+        canAttack = true;
         
     }
 
@@ -141,6 +155,118 @@ public class PlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+    }
+
+
+    void Update()
+    {
+
+        if (isSleep)
+        {
+            sleepTime += Time.deltaTime;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                wakeUp = true;
+            }
+            horizontal = 0;
+            return;
+
+        }
+
+
+        horizontal = Input.GetAxisRaw("Horizontal");
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayerMask);
+
+
+        if (horizontal > 0 && !isLookingRight)
+            Flip();
+        else if (horizontal < 0 && isLookingRight)
+            Flip();
+
+
+        if (math.abs(horizontal) > 0)
+            anim.SetBool("canWalk", true);
+        else
+            anim.SetBool("canWalk", false);
+
+
+
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) && canArrogance)
+        {
+            StartCoroutine(ArroganceMode());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2) && canJealous)
+        {
+            StartCoroutine(JealousMode());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3) && canLust)
+        {
+            StartCoroutine(LustMode());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4) && canGreed)
+        {
+            StartCoroutine(GreedMode());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5) && canSleep)
+        {
+            StartCoroutine(SleepMode());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha6) && canGlutton)
+        {
+            StartCoroutine(GluttonMode());
+        }
+
+        if (Input.GetMouseButtonDown(0) && canAttack)
+        {
+            StartCoroutine(AttackCooldown());
+            Attack();
+        }
+
+        Jump();
+
+
+
+    }
+
+
+
+    void FixedUpdate()
+    {
+        Walk();
+
+
+    }
+
+    public void Attack()
+    {
+        anim.SetTrigger("playerAttack");
+        Collider2D[] attackedEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        foreach (Collider2D col in attackedEnemies)
+        {
+            if(col.CompareTag("Enemy") || col.CompareTag("flyEnemy"))
+            {
+
+            }
+        }
+
+
+
+
+
+    }
+
+    IEnumerator AttackCooldown()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(attackCooldown);
+        canAttack = true;
     }
 
 
@@ -197,7 +323,7 @@ public class PlayerController : MonoBehaviour
         {
             if (col.CompareTag("Soul"))
             {
-                while (Vector2.Distance(transform.position, col.transform.position) > 2f)
+                while (Vector2.Distance(transform.position, col.transform.position) > 1f)
                 {
                     col.transform.position = Vector2.Lerp(col.transform.position, transform.position, greedSoulPullSpeed * Time.deltaTime);
                     yield return new WaitForSeconds(0.02f);
@@ -317,85 +443,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-    void Update()
-    {
 
-        if (isSleep)
-        {
-            sleepTime += Time.deltaTime;
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                wakeUp = true;
-            }
-            horizontal = 0;
-            return;
-
-        }
-
-
-        horizontal = Input.GetAxisRaw("Horizontal");
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayerMask);
-
-
-        if (horizontal > 0 && !isLookingRight)
-            Flip();
-        else if (horizontal < 0 && isLookingRight)
-            Flip();
-        
-
-        if(math.abs(horizontal)  > 0)
-            anim.SetBool("canWalk", true);
-        else
-            anim.SetBool("canWalk", false);
-
-
-
-
-        if (Input.GetKeyDown(KeyCode.Alpha1) && canArrogance)
-        {
-            StartCoroutine(ArroganceMode());
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2) && canJealous)
-        {
-            StartCoroutine(JealousMode());
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3) && canLust)
-        {
-            StartCoroutine(LustMode());
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha4) && canGreed)
-        {
-            StartCoroutine(GreedMode());
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha5) && canSleep)
-        {
-            StartCoroutine(SleepMode());
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha6) && canGlutton)
-        {
-            StartCoroutine(GluttonMode());
-        }
-
-
-        Jump();
-
-
-
-
-    }
-
-
-    void FixedUpdate()
-    {
-        Walk();
-
-
-    }
 
 
     void OnDrawGizmosSelected()
@@ -412,6 +460,9 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.grey;
         Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
 
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+
     }
 
 
@@ -421,8 +472,6 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, characterJumpForce);
 
-            //anim.SetBool("isJumping", true);
-            //anim.SetTrigger("takeOff");
 
         }
         if (Input.GetKeyDown(KeyCode.UpArrow) && canJump || Input.GetKeyDown(KeyCode.W) && canJump)
@@ -430,7 +479,6 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, characterJumpForce * 2/3);
             canJump = false;
 
-            // anim.SetBool("isJumping", true);
 
         }
 
@@ -444,12 +492,25 @@ public class PlayerController : MonoBehaviour
         if (isGrounded)
         {
             canJump = true;
-            // anim.SetBool("isJumping", false);
+            anim.SetBool("playerJumping", false);
+            anim.SetBool("playerFalling", false);
+
+
         }
         else
         {
-            // anim.SetBool("isJumping", true);
+            anim.SetBool("playerJumping", true);
         }
+
+        if (rb.velocity.y < 0)
+        {
+            anim.SetBool("playerJumping", false);
+            anim.SetBool("playerFalling", true);
+        }
+
+
+
+
 
 
     }

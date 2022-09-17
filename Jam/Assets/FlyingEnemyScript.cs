@@ -26,7 +26,7 @@ public class FlyingEnemyScript : MonoBehaviour
     {
         if(player == null)
             return;
-        if (chase == true)
+        else if (chase == true)
             Chase();
         else
             ReturnStartPoint();
@@ -39,6 +39,7 @@ public class FlyingEnemyScript : MonoBehaviour
 
     private void Chase()
     {
+           
         transform.position=Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         if(Vector2.Distance(transform.position,player.transform.position) <= 1.2)
         {
