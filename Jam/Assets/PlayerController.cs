@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundLayerMask;
     public float checkRadius;
-    private bool canJump = true;
+    public bool canJump = true;
 
 
 
