@@ -246,13 +246,13 @@ public class PlayerController : MonoBehaviour
     public void Attack()
     {
         anim.SetTrigger("playerAttack");
-        Collider2D[] attackedEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        Collider2D[] attackedEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
 
         foreach (Collider2D col in attackedEnemies)
         {
-            if(col.CompareTag("Enemy") || col.CompareTag("flyEnemy"))
+            if(col.CompareTag("Enemy") )
             {
-
+                col.GetComponent<FlyingEnemyScript>().TakeHit(characterPower);
             }
         }
 
@@ -369,7 +369,7 @@ public class PlayerController : MonoBehaviour
 
 
             float j = 0;
-            while (j <= lustEffectTime * 10)
+            while (j <= lustEffectTime * 10 && closestEnemy!= null)
             {
                 closestEnemy.transform.position
                     = Vector2.MoveTowards(closestEnemy.transform.position,

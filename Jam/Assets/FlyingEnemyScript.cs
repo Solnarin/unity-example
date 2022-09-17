@@ -31,10 +31,7 @@ public class FlyingEnemyScript : MonoBehaviour
         else
             ReturnStartPoint();
             Flip();
-        if (Input.GetKeyDown(KeyCode.Space)) //Space damage input
-        {
-            TakeHit();
-        }
+
     }
 
     private void Chase()
@@ -68,9 +65,9 @@ public class FlyingEnemyScript : MonoBehaviour
         speed = 2;
     }
 
-    public void TakeHit()
+    public void TakeHit(float attackDamage)
     {
-        Hitpoints -= 20;
+        Hitpoints -= attackDamage;
         Healthbar.SetHealth(Hitpoints, MaxHitpoints);
 
         if (Hitpoints <= 0)

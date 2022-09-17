@@ -409,12 +409,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5919525501772782793, guid: 96b248fdcf3afd94e9245594e998424b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5919525501772782793, guid: 96b248fdcf3afd94e9245594e998424b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5919525501772782793, guid: 96b248fdcf3afd94e9245594e998424b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.09
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 5919525501772782793, guid: 96b248fdcf3afd94e9245594e998424b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.8
+      value: 0.71
       objectReference: {fileID: 0}
     - target: {fileID: 5919525501772782793, guid: 96b248fdcf3afd94e9245594e998424b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -448,6 +456,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5919525501772782794, guid: 96b248fdcf3afd94e9245594e998424b, type: 3}
+      propertyPath: m_Radius
+      value: 0.11597094
+      objectReference: {fileID: 0}
+    - target: {fileID: 5919525501772782794, guid: 96b248fdcf3afd94e9245594e998424b, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.004460603
+      objectReference: {fileID: 0}
     - target: {fileID: 5919525501772782796, guid: 96b248fdcf3afd94e9245594e998424b, type: 3}
       propertyPath: Healthbar
       value: 
@@ -458,7 +474,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5919525501772782806, guid: 96b248fdcf3afd94e9245594e998424b, type: 3}
       propertyPath: m_Name
-      value: FlyingEnemy
+      value: FlyingEnemy Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5919525501772782806, guid: 96b248fdcf3afd94e9245594e998424b, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96b248fdcf3afd94e9245594e998424b, type: 3}
