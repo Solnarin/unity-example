@@ -94,8 +94,6 @@ public class FlyingEnemyScript : MonoBehaviour
     public void TakeHit(float attackDamage)
     {
         currentHealth -= attackDamage;
-        Healthbar.SetHealth(currentHealth, maxHealth);
-
-
+        anim.SetTrigger("damage");
     }
 }
