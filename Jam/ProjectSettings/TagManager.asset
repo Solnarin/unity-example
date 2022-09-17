@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Activator
   - platform
-  - Enemy
   - Soul
   layers:
   - Default
@@ -16,7 +15,7 @@ TagManager:
   - Water
   - UI
   - platform
-  - player
+  - 
   - 
   - 
   - 

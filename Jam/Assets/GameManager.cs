@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     public Player_G player;
     public Boss_G boss;
 
+    public float timer;
+    public bool stop;
+
     void Start()
     {
         instance = this;
@@ -29,10 +32,30 @@ public class GameManager : MonoBehaviour
             {
                 startPlaying = true;
                 theBS.hasStarted = true;
-                theMusic.Play();
+
             }
         }
+
+        if (startPlaying)
+        {
+            if (!stop)
+            {
+                timer += Time.deltaTime;
+                if(timer > 7)
+                {
+                    theMusic.Play();
+                    Debug.Log("Playing");
+                    timer -= 6;
+                }
+                else if(timer < 3)
+                {
+                    stop = true;
+                }
+            }
+        }
+       
     }
+       
 
     public void NoteHit()
     {
@@ -43,6 +66,6 @@ public class GameManager : MonoBehaviour
     public void NoteMissed()
     {
         Debug.Log("BASAMADIN");
-        player.Health -= 5;
+        player.Health -= 20;
     }
 }

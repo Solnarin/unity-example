@@ -5,14 +5,12 @@ using UnityEngine;
 public class Player_G : MonoBehaviour
 {
     public float Health = 100f;
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public Animator anim;
+
+
+    private void BackToIdle()
     {
-        
+        anim.SetBool("canAttack", false);
     }
 }

@@ -8,12 +8,6 @@ public class NoteObject : MonoBehaviour
 
     public KeyCode keyToPress;
 
-    public bool tracker;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
