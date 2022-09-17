@@ -8,12 +8,13 @@ public class NoteObject : MonoBehaviour
 
     public KeyCode keyToPress;
 
+    public bool tracker;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(keyToPress))
@@ -21,27 +22,29 @@ public class NoteObject : MonoBehaviour
             if (canBePressed)
             {
                 gameObject.SetActive(false);
-
                 GameManager.instance.NoteHit();
             }
+            
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Activator")
+        if (other.tag == "Activator")
         {
             canBePressed = true;
         }
     }
+
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Activator")
+        if (other.tag == "Activator" && gameObject.activeSelf)
         {
             canBePressed = false;
-
             GameManager.instance.NoteMissed();
         }
+
     }
+
 
 }
