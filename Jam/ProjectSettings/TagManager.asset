@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Activator
-  - Ladder
+  - platform
   layers:
   - Default
   - TransparentFX
@@ -13,9 +13,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Enemy
-  - Player
-  - Ground
+  - platform
+  - 
+  - 
   - 
   - 
   - 
@@ -45,7 +45,4 @@ TagManager:
     locked: 0
   - name: Arrows
     uniqueID: 3081773039
-    locked: 0
-  - name: Player
-    uniqueID: 2975588317
     locked: 0
