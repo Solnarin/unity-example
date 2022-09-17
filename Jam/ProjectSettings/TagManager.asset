@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Activator
   - platform
+  - Soul
   layers:
   - Default
   - TransparentFX
