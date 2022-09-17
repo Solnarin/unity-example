@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     public float checkRadius;
     private bool canJump = true;
 
+
+
     private bool isLookingRight = true;
 
 
