@@ -22,9 +22,16 @@ public class FlyingEnemyScript : MonoBehaviour
     public float maxHealth = 100;
 
 
+    [Header("Attack")]
+    public Transform attackPoint;
+    public float attackRange;
+    public float attackDamage;
+
 
     private GameObject player;
     private Animator anim;
+
+
 
 
     void Start()
@@ -68,6 +75,15 @@ public class FlyingEnemyScript : MonoBehaviour
         {
             enemySpeed = whileAttackingSpeed;
             anim.SetBool("canShoot", true);
+            Collider2D[] attackPlayer = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRange);
+            foreach(Collider2D col in attackPlayer)
+            {
+                if (col.CompareTag("Player"))
+                {
+                    col.GetComponent<playerStatsController>().Damage(attackDamage);
+                }
+            }
+
         }
         
     }
@@ -96,4 +112,18 @@ public class FlyingEnemyScript : MonoBehaviour
         currentHealth -= attackDamage;
         anim.SetTrigger("damage");
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+
+    }
+
+
+
+
+
+
+
 }
