@@ -27,6 +27,7 @@ public class HotZoneCheck : MonoBehaviour
         if (collider.gameObject.CompareTag("Player"))
         {
             inRange = true;
+            enemyParent.moveSpeed = 3;
         }
     }
 
@@ -39,6 +40,7 @@ public class HotZoneCheck : MonoBehaviour
             enemyParent.triggerArea.SetActive(true);
             enemyParent.inRange = false;
             enemyParent.SelectTarget();
+            enemyParent.moveSpeed = 2;
         }
     }
 }
