@@ -16,6 +16,9 @@ public class Enemy_behaviour : MonoBehaviour
     [HideInInspector] public bool inRange; //Check if Player is in range
     public GameObject hotZone;
     public GameObject triggerArea;
+    public HealthbarBehaviour Healthbar;
+    public float Hitpoints;
+    public float MaxHitpoints = 100;
     #endregion
 
     #region Private Variables
@@ -31,6 +34,12 @@ public class Enemy_behaviour : MonoBehaviour
         SelectTarget();
         intTimer = timer; //Store the inital value of timer
         anim = GetComponent<Animator>();
+    }
+
+    void Start()
+    {
+        Hitpoints = MaxHitpoints;
+        Healthbar.SetHealth(Hitpoints, MaxHitpoints);
     }
 
     void Update()
@@ -158,5 +167,16 @@ public class Enemy_behaviour : MonoBehaviour
         
 
         transform.eulerAngles = rotation;
+    }
+
+    public void TakeHit(float damage)
+    {
+        Hitpoints -= damage;
+
+        if(Hitpoints <= 0)
+        {
+            Destroy(gameObject);
+        }
+
     }
 }
