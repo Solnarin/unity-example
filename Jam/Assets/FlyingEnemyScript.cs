@@ -26,19 +26,17 @@ public class FlyingEnemyScript : MonoBehaviour
     {
         if(player == null)
             return;
-        if (chase == true)
+        else if (chase == true)
             Chase();
         else
             ReturnStartPoint();
             Flip();
-        if (Input.GetKeyDown(KeyCode.Space)) //Space damage input
-        {
-            TakeHit();
-        }
+
     }
 
     private void Chase()
     {
+           
         transform.position=Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         if(Vector2.Distance(transform.position,player.transform.position) <= 1.2)
         {
@@ -67,9 +65,9 @@ public class FlyingEnemyScript : MonoBehaviour
         speed = 2;
     }
 
-    public void TakeHit()
+    public void TakeHit(float attackDamage)
     {
-        Hitpoints -= 20;
+        Hitpoints -= attackDamage;
         Healthbar.SetHealth(Hitpoints, MaxHitpoints);
 
         if (Hitpoints <= 0)
