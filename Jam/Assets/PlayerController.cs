@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 
 public class PlayerController : MonoBehaviour
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public float checkRadius;
     private bool canJump = true;
 
+    private bool isAlive = true;
     private int soulCount = 0;
 
     private bool isLookingRight = true;
@@ -75,11 +78,16 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Soul")) 
+        if (collision.gameObject.CompareTag("Soul"))
         {
             soulCount += 1;
             print(soulCount);
             Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.CompareTag("void") && isAlive) 
+        {
+            isAlive = false;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 

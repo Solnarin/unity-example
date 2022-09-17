@@ -7,6 +7,9 @@ TagManager:
   - Activator
   - platform
   - Soul
+  - Enemy
+  - void
+  - ladder
   layers:
   - Default
   - TransparentFX
