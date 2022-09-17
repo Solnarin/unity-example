@@ -4,28 +4,26 @@ using UnityEngine;
 
 public class ButtonController : MonoBehaviour
 {
-    private SpriteRenderer theSR;
-    public Sprite defaultImage;
-    public Sprite pressedImage;
-
+    public int count;
     public KeyCode keyToPress;
+    public Animator anim;
 
-    void Start()
-    {
-        theSR = GetComponent<SpriteRenderer>();
-    }
-
-    
     void Update()
     {
         if (Input.GetKeyDown(keyToPress))
         {
-            theSR.sprite = pressedImage;
+            count++;
         }
 
-        if (Input.GetKeyUp(keyToPress))
+        if(count == 5)
         {
-            theSR.sprite = defaultImage;
+            PlayAttack();
         }
+    }
+
+    private void PlayAttack()
+    {
+        count = 0;
+        anim.SetBool("canAttack", true);
     }
 }

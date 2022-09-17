@@ -8,9 +8,15 @@ public class ChaseControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
+    }
+
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
         if (collision.CompareTag("Player"))
         {
-            foreach(FlyingEnemyScript enemy in enemyArray)
+            foreach (FlyingEnemyScript enemy in enemyArray)
             {
                 enemy.chase = true;
             }
