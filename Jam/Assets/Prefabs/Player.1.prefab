@@ -175,6 +175,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   checkRadius: 0.1
+  canJump: 1
 --- !u!1 &9119127544599448229
 GameObject:
   m_ObjectHideFlags: 0
