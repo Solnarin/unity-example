@@ -4,19 +4,24 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
 
 
 public class PlayerController : MonoBehaviour
 {
+    private float horizontal;
+    private bool isLookingRight = true;
+
 
     [Header("Player Stats")]
 
-    [SerializeField]
-    private float walkSpeed;
-    private float horizontal;
-    public float jumpForce;
+    public float characterSpeed;
+    public float characterPower;
+    public float characterJumpForce;
+    public float characterSoulAmount;
+
+
+
+
 
 
     [Header("Double Jump")]
@@ -24,19 +29,139 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundLayerMask;
     public float checkRadius;
-    private bool canJump = true;
+    public bool canJump = true;
 
-    private bool isAlive = true;
-    private int soulCount = 0;
 
-    private bool isLookingRight = true;
+
 
 
 
 
     Animator anim;
     Rigidbody2D rb;
+    public playerStatsController playerStatsController;
 
+    //---------------------------------------------------------------------------------------
+
+    [Header("Arrogance")]
+
+    public float characterNormalPower;
+    public float characterArrogancePower;
+
+
+    public float characterNormalSpeed;
+    public float characterArroganceSpeed;
+
+    public float characterNormalJumpForce;
+    public float characterArroganceJumpForce;
+
+
+
+    public float arroganceCooldown;
+    public float arroganceTime;
+    public bool canArrogance;
+
+    //---------------------------------------------------------------------------------------
+
+    [Header("Jealous")]
+
+
+    public bool canJealous;
+    public float jealousCooldown;
+    public float jealousAmount;
+
+    public float jealousRadius;
+    public float jealousDistanceDraw;
+
+
+    //---------------------------------------------------------------------------------------
+
+    [Header("Lust")]
+
+
+
+    public bool canLust;
+    public float lustForce;
+    public float lustEffectTime;
+    public float lustCooldown;
+
+    public float lustRadius;
+    public float lustDistanceDraw;
+
+    //---------------------------------------------------------------------------------------
+
+    [Header("Greed")]
+
+
+    public bool canGreed;
+    public float greedCooldown;
+
+
+    public float greedSoulPullSpeed;
+
+
+    public float greedRadius;
+    public float greedDistanceDraw;
+
+    //---------------------------------------------------------------------------------------
+
+    [Header("Sleep")]
+
+
+    public bool canSleep;
+    private bool isSleep;
+    public float sleepCooldown;
+
+    public float sleepHeal;
+    private float sleepTime;
+
+    private bool wakeUp;
+
+
+    //---------------------------------------------------------------------------------------
+
+    [Header("Glutton")]
+
+
+    public bool canGlutton;
+
+    public float gluttonPowerAmount;
+    public float gluttonCooldown;
+
+    //---------------------------------------------------------------------------------------
+
+    [Header("Anger")]
+
+
+    public GameObject breakableSoul ;
+
+
+    //---------------------------------------------------------------------------------------
+
+
+    [Header("Attack")]
+
+    public bool canAttack;
+    public float attackCooldown;
+
+
+    public Transform attackPoint;
+    public float attackRange;
+
+    public soulController SoulCollecter;
+
+
+    private void Awake()
+    {
+        canGlutton = true;
+        canSleep = true;
+        canLust = true;
+        canGreed = true;
+        canJealous = true;
+        canArrogance = true;
+        canAttack = true;
+        
+    }
 
     void Start()
     {
@@ -44,8 +169,23 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+
     void Update()
     {
+
+        if (isSleep)
+        {
+            sleepTime += Time.deltaTime;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                wakeUp = true;
+            }
+            horizontal = 0;
+            return;
+
+        }
+
+
         horizontal = Input.GetAxisRaw("Horizontal");
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayerMask);
 
@@ -54,39 +194,165 @@ public class PlayerController : MonoBehaviour
             Flip();
         else if (horizontal < 0 && isLookingRight)
             Flip();
-        
 
-        if(math.abs(horizontal)  > 0)
+
+        if (math.abs(horizontal) > 0)
             anim.SetBool("canWalk", true);
         else
             anim.SetBool("canWalk", false);
 
 
+
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) && canArrogance)
+        {
+            StartCoroutine(ArroganceMode());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2) && canJealous)
+        {
+            StartCoroutine(JealousMode());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3) && canLust)
+        {
+            StartCoroutine(LustMode());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4) && canGreed)
+        {
+            StartCoroutine(GreedMode());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5) && canSleep)
+        {
+            StartCoroutine(SleepMode());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha6) && canGlutton)
+        {
+            StartCoroutine(GluttonMode());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha7) && characterSoulAmount>0)
+        {
+            GameObject soul = Instantiate(breakableSoul,transform.position, Quaternion.identity);
+            if (isLookingRight)
+            {
+                soul.GetComponent<Rigidbody2D>().AddForce(Vector2.right *1000);
+                Destroy(soul.gameObject, 5f);
+                characterSoulAmount--;
+            }
+            else
+            {
+                soul.GetComponent<Rigidbody2D>().AddForce(Vector2.left * 1000);
+                Destroy(soul.gameObject, 5f);
+                characterSoulAmount--;
+
+
+            }
+
+        }
+
+        if (Input.GetMouseButtonDown(0) && canAttack)
+        {
+            StartCoroutine(AttackCooldown());
+            Attack();
+        }
+
         Jump();
 
 
 
-
     }
+
 
 
     void FixedUpdate()
     {
         Walk();
 
+
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Attack()
     {
-        if (collision.gameObject.CompareTag("Soul"))
+        anim.SetTrigger("playerAttack");
+        Collider2D[] attackedEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
+
+        foreach (Collider2D col in attackedEnemies)
         {
-            soulCount += 1;
-            print(soulCount);
-            Destroy(collision.gameObject);
+            if(col.CompareTag("Enemy") )
+            {
+                col.GetComponent<FlyingEnemyScript>().TakeHit(characterPower);
+            }
         }
-        else if (collision.gameObject.CompareTag("void") && isAlive) 
+
+
+
+
+
+    }
+
+    IEnumerator AttackCooldown()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(attackCooldown);
+        canAttack = true;
+    }
+
+
+    IEnumerator GluttonMode()
+    {
+        canGlutton = false;
+
+
+        characterSoulAmount--;
+        characterPower += gluttonPowerAmount;
+
+        yield return new WaitForSeconds(gluttonCooldown);
+        canGlutton = true;
+    }
+
+    IEnumerator SleepMode()
+    {
+        canSleep = false;
+        isSleep = true;
+
+
+        anim.SetTrigger("playerSleep");
+
+        yield return new WaitForSeconds(0.5f);
+
+        anim.SetTrigger("playerSleeping");
+
+
+
+        yield return new WaitUntil(() => wakeUp);
+
+        yield return new WaitForSeconds(1f);
+
+        playerStatsController.Damage(-(sleepHeal * sleepTime));
+        wakeUp = false;
+        isSleep = false;
+        sleepTime = 0;
+        anim.SetTrigger("playerWakeUp");
+        anim.ResetTrigger("playerSleeping");
+
+        yield return new WaitForSeconds(sleepCooldown);
+        canSleep = true;
+
+
+    }
+
+
+    IEnumerator GreedMode()
+    {
+        canGreed = false;
+
+        Collider2D[] colliderList = Physics2D.OverlapCircleAll(transform.position, greedRadius);
+        foreach (Collider2D col in colliderList)
         {
-<<<<<<< HEAD
             if (col.CompareTag("Soul") && col.gameObject != null)
             {
                 while (Vector2.Distance(transform.position, col.transform.position) > 1.4f && col.gameObject != null)
@@ -102,55 +368,187 @@ public class PlayerController : MonoBehaviour
 
 
 
-=======
-            isAlive = false;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
->>>>>>> eec46983b087466886861257c0e6c4d947c087d5
         }
+
+        yield return new WaitForSeconds(greedCooldown);
+        canGreed = true;
+
+
     }
+
+    IEnumerator LustMode()
+    {
+        canLust = false;
+
+
+        Collider2D[] colliderList = Physics2D.OverlapCircleAll(transform.position, lustRadius);
+        List<Collider2D> enemyList = new List<Collider2D>();
+        List<float> enemyDistance = new List<float>();
+
+        foreach (Collider2D col in colliderList)
+        {
+            if (col.CompareTag("Enemy"))
+                enemyList.Add(col);
+
+        }
+
+        if (enemyList.Count > 0)
+        {
+            for (int i = 0; i < enemyList.Count; i++)
+                enemyDistance.Add(Vector2.Distance(transform.position, enemyList[i].transform.position));
+
+
+            Collider2D closestEnemy = enemyList[enemyDistance.IndexOf(enemyDistance.Min())];
+
+
+            float j = 0;
+            while (j <= lustEffectTime * 10 && closestEnemy!= null)
+            {
+                closestEnemy.transform.position
+                    = Vector2.MoveTowards(closestEnemy.transform.position,
+                    transform.position, lustForce * Time.deltaTime);
+                yield return new WaitForSeconds(0.05f);
+                j++;
+            }
+        }
+
+
+
+
+
+
+        yield return new WaitForSeconds(lustCooldown);
+        canLust = true;
+
+    }
+
+
+
+    IEnumerator JealousMode()
+    {
+        canJealous = false;
+
+        Collider2D[] colliderList = Physics2D.OverlapCircleAll(transform.position, jealousRadius);
+        foreach (Collider2D col in colliderList)
+        {
+            if (col.CompareTag("Enemy"))
+            {
+
+                col.GetComponent<FlyingEnemyScript>().TakeHit(jealousAmount);
+
+                playerStatsController.Damage(-jealousAmount);
+
+            }
+
+
+
+        }
+
+
+        yield return new WaitForSeconds(jealousCooldown);
+        canJealous = true;
+    }
+
+    IEnumerator ArroganceMode()
+    {
+
+        canArrogance = false;
+        characterPower = characterArrogancePower;
+        characterSpeed = characterArroganceSpeed;
+        characterJumpForce = characterArroganceJumpForce;
+
+        //ARROGANCE EFFECT
+
+        yield return new WaitForSeconds(arroganceTime);
+
+        characterPower = characterNormalPower;
+        characterSpeed = characterNormalSpeed;
+        characterJumpForce = characterNormalJumpForce;
+
+
+        yield return new WaitForSeconds(arroganceCooldown);
+        canArrogance = true;
+
+    }
+
+
+
+
+
+
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, jealousDistanceDraw);
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(transform.position, lustDistanceDraw);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, greedDistanceDraw);
+
+        Gizmos.color = Color.grey;
+        Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
+
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+
+    }
+
 
     private void Jump()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded || Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            rb.velocity = new Vector2(rb.velocity.x, characterJumpForce);
 
-            //anim.SetBool("isJumping", true);
-            //anim.SetTrigger("takeOff");
 
         }
         if (Input.GetKeyDown(KeyCode.UpArrow) && canJump || Input.GetKeyDown(KeyCode.W) && canJump)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce*2/3);
+            rb.velocity = new Vector2(rb.velocity.x, characterJumpForce * 2/3);
             canJump = false;
 
-            // anim.SetBool("isJumping", true);
 
         }
 
-        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-        {
-            rb.AddForce(Vector2.down * jumpForce / 60, ForceMode2D.Impulse);
 
-        }
 
 
         if (isGrounded)
         {
             canJump = true;
-            // anim.SetBool("isJumping", false);
+
+            anim.SetBool("playerFalling", false);
+
+            anim.SetBool("playerJumping", false);
+
+
         }
+
         else
         {
-            // anim.SetBool("isJumping", true);
+            anim.SetBool("playerJumping", true);
         }
+
+
+        if (rb.velocity.y < 0)
+        {
+            anim.SetBool("playerJumping", false);
+            anim.SetBool("playerFalling", true);
+        }
+
+
+
+
 
 
     }
 
     private void Walk()
     {
-        rb.velocity = new Vector2(walkSpeed * horizontal * Time.deltaTime, rb.velocity.y);
+        rb.velocity = new Vector2(characterSpeed * horizontal * Time.deltaTime, rb.velocity.y);
     }
 
     private void Flip()
@@ -160,4 +558,4 @@ public class PlayerController : MonoBehaviour
     }
 
 
-}
+}   
