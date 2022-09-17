@@ -39,7 +39,7 @@ public class Enemy_behaviour : MonoBehaviour
     void Start()
     {
         Hitpoints = MaxHitpoints;
-        Healthbar.SetHealth(Hitpoints, MaxHitpoints);
+       // Healthbar.SetHealth(Hitpoints, MaxHitpoints);
     }
 
     void Update()
@@ -177,7 +177,7 @@ public class Enemy_behaviour : MonoBehaviour
     public void TakeHit()
     {
         Hitpoints -= 20;
-        Healthbar.SetHealth(Hitpoints, MaxHitpoints);
+        // Healthbar.SetHealth(Hitpoints, MaxHitpoints);
 
         if(Hitpoints <= 0)
         {
