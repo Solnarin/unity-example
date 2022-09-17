@@ -4,21 +4,36 @@ using UnityEngine;
 
 public class FlyingEnemyScript : MonoBehaviour
 {
-    public float speed;
-    private GameObject player;
-    public bool chase = false;
+
+    [Header("Enemy Stats")]
+
+
+    private float enemySpeed;
+    public float chaseSpeed;
+    public float whileAttackingSpeed;
     public Transform startingPoint;
-    private Animator anim;
+    public bool chase = false;
+
+
+    [Header("Health Bar")]
+
     public HealthbarBehaviour Healthbar;
-    public float Hitpoints;
-    public float MaxHitpoints = 100;
+    public float currentHealth;
+    public float maxHealth = 100;
+
+
+
+    private GameObject player;
+    private Animator anim;
+
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
-        Hitpoints = MaxHitpoints;
-        Healthbar.SetHealth(Hitpoints, MaxHitpoints);
+        currentHealth = maxHealth;
+        Healthbar.SetHealth(currentHealth, maxHealth);
+        enemySpeed = chaseSpeed;
     }
     
     // Update is called once per frame
@@ -32,15 +47,26 @@ public class FlyingEnemyScript : MonoBehaviour
             ReturnStartPoint();
             Flip();
 
+
+        if (currentHealth < maxHealth)
+            Healthbar.SetHealth(currentHealth, maxHealth);
+
+
+        if(currentHealth > maxHealth)
+            currentHealth = maxHealth;
+
+        if (currentHealth <= 0)
+            Destroy(gameObject);
+
     }
 
     private void Chase()
     {
            
-        transform.position=Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        transform.position=Vector2.MoveTowards(transform.position, player.transform.position, enemySpeed * Time.deltaTime);
         if(Vector2.Distance(transform.position,player.transform.position) <= 1.2)
         {
-            speed = 0;
+            enemySpeed = whileAttackingSpeed;
             anim.SetBool("canShoot", true);
         }
         
@@ -48,7 +74,7 @@ public class FlyingEnemyScript : MonoBehaviour
 
     private void ReturnStartPoint()
     {
-        transform.position = Vector2.MoveTowards(transform.position, startingPoint.position, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, startingPoint.position, enemySpeed * Time.deltaTime);
     }
 
     private void Flip()
@@ -62,18 +88,14 @@ public class FlyingEnemyScript : MonoBehaviour
     private void StopShooting()
     {
         anim.SetBool("canShoot", false);
-        speed = 2;
+        enemySpeed = chaseSpeed;
     }
 
     public void TakeHit(float attackDamage)
     {
-        Hitpoints -= attackDamage;
-        Healthbar.SetHealth(Hitpoints, MaxHitpoints);
+        currentHealth -= attackDamage;
+        Healthbar.SetHealth(currentHealth, maxHealth);
 
-        if (Hitpoints <= 0)
-        {
-            Destroy(gameObject);
-        }
 
     }
 }

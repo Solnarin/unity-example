@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public float characterSpeed;
     public float characterPower;
     public float characterJumpForce;
+    public float characterSoulAmount;
+
 
 
 
@@ -128,6 +130,15 @@ public class PlayerController : MonoBehaviour
 
     //---------------------------------------------------------------------------------------
 
+    [Header("Anger")]
+
+
+    public GameObject breakableSoul ;
+
+
+    //---------------------------------------------------------------------------------------
+
+
     [Header("Attack")]
 
     public bool canAttack;
@@ -136,7 +147,8 @@ public class PlayerController : MonoBehaviour
 
     public Transform attackPoint;
     public float attackRange;
-    public LayerMask enemyLayers;
+
+    public soulController SoulCollecter;
 
 
     private void Awake()
@@ -222,6 +234,26 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(GluttonMode());
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha7) && characterSoulAmount>0)
+        {
+            GameObject soul = Instantiate(breakableSoul,transform.position, Quaternion.identity);
+            if (isLookingRight)
+            {
+                soul.GetComponent<Rigidbody2D>().AddForce(Vector2.right *1000);
+                Destroy(soul.gameObject, 5f);
+                characterSoulAmount--;
+            }
+            else
+            {
+                soul.GetComponent<Rigidbody2D>().AddForce(Vector2.left * 1000);
+                Destroy(soul.gameObject, 5f);
+                characterSoulAmount--;
+
+
+            }
+
+        }
+
         if (Input.GetMouseButtonDown(0) && canAttack)
         {
             StartCoroutine(AttackCooldown());
@@ -275,7 +307,7 @@ public class PlayerController : MonoBehaviour
         canGlutton = false;
 
 
-        //soul--
+        characterSoulAmount--;
         characterPower += gluttonPowerAmount;
 
         yield return new WaitForSeconds(gluttonCooldown);
@@ -323,11 +355,12 @@ public class PlayerController : MonoBehaviour
         {
             if (col.CompareTag("Soul"))
             {
-                while (Vector2.Distance(transform.position, col.transform.position) > 1f)
+                while (Vector2.Distance(transform.position, col.transform.position) > 1.4f && col.gameObject != null)
                 {
                     col.transform.position = Vector2.Lerp(col.transform.position, transform.position, greedSoulPullSpeed * Time.deltaTime);
                     yield return new WaitForSeconds(0.02f);
                 }
+                characterSoulAmount++;
                 Destroy(col.gameObject);
 
 
@@ -401,7 +434,8 @@ public class PlayerController : MonoBehaviour
             if (col.CompareTag("Enemy"))
             {
 
-                // col.gameObject.GetComponent<enemyController>().damage(jealousAmount);
+                col.GetComponent<FlyingEnemyScript>().TakeHit(jealousAmount);
+
                 playerStatsController.Damage(-jealousAmount);
 
             }
@@ -482,25 +516,25 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-        {
-            rb.AddForce(Vector2.down * characterJumpForce / 60, ForceMode2D.Impulse);
 
-        }
 
 
         if (isGrounded)
         {
             canJump = true;
-            anim.SetBool("playerJumping", false);
+
             anim.SetBool("playerFalling", false);
+
+            anim.SetBool("playerJumping", false);
 
 
         }
+
         else
         {
             anim.SetBool("playerJumping", true);
         }
+
 
         if (rb.velocity.y < 0)
         {

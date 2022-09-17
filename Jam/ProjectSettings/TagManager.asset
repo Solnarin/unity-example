@@ -9,6 +9,8 @@ TagManager:
   - Soul
   - Enemy
   - flyingEnemy
+  - breakableSoul
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - Water
   - UI
   - platform
-  - 
+  - brekableWall
   - 
   - 
   - 
