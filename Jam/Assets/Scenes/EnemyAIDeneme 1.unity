@@ -827,6 +827,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 403624706584605290, guid: fc8ea49c08232024db3b295c0f1e0dfc, type: 3}
+      propertyPath: jumpForce
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 403624706584605290, guid: fc8ea49c08232024db3b295c0f1e0dfc, type: 3}
+      propertyPath: walkSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 403624706584605290, guid: fc8ea49c08232024db3b295c0f1e0dfc, type: 3}
+      propertyPath: checkRadius
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 403624706584605290, guid: fc8ea49c08232024db3b295c0f1e0dfc, type: 3}
+      propertyPath: groundCheck
+      value: 
+      objectReference: {fileID: 9541583}
+    - target: {fileID: 403624706584605290, guid: fc8ea49c08232024db3b295c0f1e0dfc, type: 3}
+      propertyPath: groundLayerMask.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc8ea49c08232024db3b295c0f1e0dfc, type: 3}
 --- !u!1001 &5919525502902710968
