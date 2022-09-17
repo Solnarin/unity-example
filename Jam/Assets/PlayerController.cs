@@ -353,7 +353,7 @@ public class PlayerController : MonoBehaviour
         Collider2D[] colliderList = Physics2D.OverlapCircleAll(transform.position, greedRadius);
         foreach (Collider2D col in colliderList)
         {
-            if (col.CompareTag("Soul"))
+            if (col.CompareTag("Soul") && col.gameObject != null)
             {
                 while (Vector2.Distance(transform.position, col.transform.position) > 1.4f && col.gameObject != null)
                 {
@@ -457,10 +457,7 @@ public class PlayerController : MonoBehaviour
         characterSpeed = characterArroganceSpeed;
         characterJumpForce = characterArroganceJumpForce;
 
-        /*
-         COOLDOWN UI
-         ARROGANCE EFFECT
-        */
+        //ARROGANCE EFFECT
 
         yield return new WaitForSeconds(arroganceTime);
 

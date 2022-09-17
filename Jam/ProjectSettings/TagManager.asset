@@ -8,9 +8,8 @@ TagManager:
   - platform
   - Soul
   - Enemy
-  - flyingEnemy
-  - breakableSoul
-  - Wall
+  - void
+  - ladder
   layers:
   - Default
   - TransparentFX
@@ -19,7 +18,7 @@ TagManager:
   - Water
   - UI
   - platform
-  - brekableWall
+  - 
   - 
   - 
   - 

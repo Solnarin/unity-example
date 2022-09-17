@@ -30,9 +30,9 @@ public class cameraController : MonoBehaviour
 
 
 
-            if (camera.orthographicSize >= 6)
+            if (camera.orthographicSize >= 10)
             {
-                camera.orthographicSize = 6; // Max size
+                camera.orthographicSize = 10; // Max size
             }
         }
 
