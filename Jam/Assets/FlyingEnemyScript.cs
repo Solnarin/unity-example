@@ -9,11 +9,16 @@ public class FlyingEnemyScript : MonoBehaviour
     public bool chase = false;
     public Transform startingPoint;
     private Animator anim;
+    public HealthbarBehaviour Healthbar;
+    public float Hitpoints;
+    public float MaxHitpoints = 100;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
+        Hitpoints = MaxHitpoints;
+        Healthbar.SetHealth(Hitpoints, MaxHitpoints);
     }
     
     // Update is called once per frame
@@ -26,7 +31,10 @@ public class FlyingEnemyScript : MonoBehaviour
         else
             ReturnStartPoint();
             Flip();
-
+        if (Input.GetKeyDown(KeyCode.Space)) //Space damage input
+        {
+            TakeHit();
+        }
     }
 
     private void Chase()
@@ -57,5 +65,17 @@ public class FlyingEnemyScript : MonoBehaviour
     {
         anim.SetBool("canShoot", false);
         speed = 2;
+    }
+
+    public void TakeHit()
+    {
+        Hitpoints -= 20;
+        Healthbar.SetHealth(Hitpoints, MaxHitpoints);
+
+        if (Hitpoints <= 0)
+        {
+            Destroy(gameObject);
+        }
+
     }
 }

@@ -59,6 +59,11 @@ public class Enemy_behaviour : MonoBehaviour
         {
             EnemyLogic();
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TakeHit();
+        }
     }
 
 
@@ -169,9 +174,10 @@ public class Enemy_behaviour : MonoBehaviour
         transform.eulerAngles = rotation;
     }
 
-    public void TakeHit(float damage)
+    public void TakeHit()
     {
-        Hitpoints -= damage;
+        Hitpoints -= 20;
+        Healthbar.SetHealth(Hitpoints, MaxHitpoints);
 
         if(Hitpoints <= 0)
         {
