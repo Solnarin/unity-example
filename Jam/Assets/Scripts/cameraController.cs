@@ -9,6 +9,11 @@ public class cameraController : MonoBehaviour
     public float xDistance;
     public float yDistance;
     public new Camera camera;
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+
+    }
 
 
     private void Update()
@@ -16,9 +21,9 @@ public class cameraController : MonoBehaviour
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
             camera.orthographicSize = camera.orthographicSize - 100 * Time.deltaTime;
-            if (camera.orthographicSize <= 4)
+            if (camera.orthographicSize <= 5)
             {
-                camera.orthographicSize = 4; // Min size 
+                camera.orthographicSize = 5; // Min size 
             }
 
         }
@@ -30,9 +35,9 @@ public class cameraController : MonoBehaviour
 
 
 
-            if (camera.orthographicSize >= 10)
+            if (camera.orthographicSize >= 8f)
             {
-                camera.orthographicSize = 10; // Max size
+                camera.orthographicSize = 8f; // Max size
             }
         }
 
