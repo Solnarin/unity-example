@@ -168,8 +168,7 @@ public class PlayerController : MonoBehaviour
     //---------------------------------------------------------------------------------------
 
 
-
-
+    public cameraController cameraController;
 
     void Start()
     {
@@ -179,6 +178,7 @@ public class PlayerController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         playerStatsController = FindObjectOfType<playerStatsController>();
         audioSource = GetComponent<AudioSource>();
+        cameraController = FindObjectOfType<cameraController>();
     }
 
 
@@ -571,6 +571,11 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(new Vector2(0,-characterJumpForce/175),ForceMode2D.Impulse);
 
 
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            cameraController.au.mute = !cameraController.au.mute;
         }
 
 

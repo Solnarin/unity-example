@@ -91,7 +91,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -228,10 +228,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4bc1f683140d114880fc15a64054cd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontal: 0
   characterSpeed: 0
   characterPower: 0
   characterJumpForce: 0
   characterSoulAmount: 0
+  isGrounded: 0
   groundCheck: {fileID: 9119127544599448230}
   groundLayerMask:
     serializedVersion: 2
@@ -271,11 +273,21 @@ MonoBehaviour:
   gluttonPowerAmount: 0
   gluttonCooldown: 0
   breakableSoul: {fileID: 0}
+  canAnger: 0
   canAttack: 0
   attackCooldown: 0
   attackPoint: {fileID: 6803448150726824332}
   attackRange: 0
   SoulCollecter: {fileID: 0}
+  soulText: {fileID: 0}
+  infoText: {fileID: 0}
+  audioSource: {fileID: 0}
+  jumpSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  swordMissSound: {fileID: 0}
+  swordHitSound: {fileID: 0}
+  soulCollectedSound: {fileID: 0}
+  soulThrowSound: {fileID: 0}
 --- !u!1 &9119127544599448229
 GameObject:
   m_ObjectHideFlags: 0

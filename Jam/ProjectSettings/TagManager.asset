@@ -11,6 +11,8 @@ TagManager:
   - void
   - ladder
   - dialog
+  - breakableSoul
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -19,8 +21,8 @@ TagManager:
   - Water
   - UI
   - platform
-  - 
-  - 
+  - postprocessing
+  - no post
   - 
   - 
   - 

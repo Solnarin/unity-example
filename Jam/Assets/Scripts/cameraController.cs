@@ -9,10 +9,14 @@ public class cameraController : MonoBehaviour
     public float xDistance;
     public float yDistance;
     public new Camera camera;
+
+    public AudioSource au;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-
+        au = GetComponent<AudioSource>();
+        
     }
 
 
