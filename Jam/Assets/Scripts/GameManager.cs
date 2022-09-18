@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class GameManager : MonoBehaviour
     public BeatScroller theBS;
 
     public static GameManager instance;
+
+ //   public Canvas canvas;
 
     public Player_G player;
     public Boss_G boss;
@@ -32,7 +35,7 @@ public class GameManager : MonoBehaviour
             {
                 startPlaying = true;
                 theBS.hasStarted = true;
-
+            //    canvas.enabled = false;
             }
         }
 
@@ -64,6 +67,5 @@ public class GameManager : MonoBehaviour
     public void NoteMissed()
     {
         player.Health -= 20;
-        Debug.Log("Miss");
     }
 }
