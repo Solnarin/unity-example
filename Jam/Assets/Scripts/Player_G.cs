@@ -7,7 +7,7 @@ public class Player_G : MonoBehaviour
     public float Health = 100f;
 
     public Animator anim;
-    public Animator laserAnim;
+
 
     private void Update()
     {
@@ -16,9 +16,6 @@ public class Player_G : MonoBehaviour
             SceneManager.LoadScene(2);
         }
     }
-    private void BackToIdle()
-    {
-        laserAnim.SetBool("canFire?", false);
-    }
+    
    
 }
