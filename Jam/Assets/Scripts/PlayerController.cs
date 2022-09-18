@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    private float horizontal;
+    public float horizontal;
     private bool isLookingRight = true;
 
 
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("Double Jump")]
-    private bool isGrounded;
+    public bool isGrounded;
     public Transform groundCheck;
     public LayerMask groundLayerMask;
     public float checkRadius;
@@ -154,20 +154,20 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI soulText;
     public TextMeshProUGUI infoText;
 
+    //---------------------------------------------------------------------------------------
 
-    /*    
-     *    private void Awake()
-    {
-        canGlutton = true;
-        canSleep = true;
-        canLust = true;
-        canGreed = true;
-        canJealous = true;
-        canArrogance = true;
-        canAttack = true;
-        
-    }
-     */
+
+    public AudioSource audioSource;
+    public AudioClip jumpSound;
+    public AudioClip deathSound;
+    public AudioClip swordMissSound;
+    public AudioClip swordHitSound;
+    public AudioClip soulCollectedSound;
+    public AudioClip soulThrowSound;
+
+    //---------------------------------------------------------------------------------------
+
+
 
 
 
@@ -178,6 +178,7 @@ public class PlayerController : MonoBehaviour
         canAttack = true;
         DontDestroyOnLoad(gameObject);
         playerStatsController = FindObjectOfType<playerStatsController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -211,6 +212,8 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("canWalk", true);
         else
             anim.SetBool("canWalk", false);
+
+
 
 
 
@@ -257,12 +260,15 @@ public class PlayerController : MonoBehaviour
             if (isLookingRight)
             {
                 soul.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 1000);
+                audioSource.PlayOneShot(soulThrowSound);
                 Destroy(soul.gameObject, 5f);
                 characterSoulAmount--;
             }
             else
             {
                 soul.GetComponent<Rigidbody2D>().AddForce(Vector2.left * 1000);
+                audioSource.PlayOneShot(soulThrowSound);
+
                 Destroy(soul.gameObject, 5f);
                 characterSoulAmount--;
 
@@ -304,7 +310,12 @@ public class PlayerController : MonoBehaviour
             if (col.CompareTag("Enemy"))
             {
                 col.GetComponent<FlyingEnemyScript>().TakeHit(characterPower);
+                audioSource.PlayOneShot(swordHitSound);
+
             }
+            else
+                audioSource.PlayOneShot(swordMissSound);
+
         }
 
 
@@ -382,6 +393,7 @@ public class PlayerController : MonoBehaviour
                     yield return new WaitForSeconds(0.02f);
                 }
                 characterSoulAmount++;
+                audioSource.PlayOneShot(soulCollectedSound);
                 Destroy(col.gameObject);
 
 
@@ -458,6 +470,8 @@ public class PlayerController : MonoBehaviour
             {
 
                 col.GetComponent<FlyingEnemyScript>().TakeHit(jealousAmount);
+                audioSource.PlayOneShot(deathSound);
+
                 playerStatsController.Damage(-jealousAmount);
 
 
@@ -527,6 +541,8 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "void")
         {
             playerStatsController.currentHealth = 0;
+            audioSource.PlayOneShot(deathSound);
+
         }
     }
 
@@ -536,6 +552,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded || Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, characterJumpForce);
+            audioSource.PlayOneShot(jumpSound);
 
 
         }
@@ -543,9 +560,19 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, characterJumpForce * 2 / 3);
             canJump = false;
+            audioSource.PlayOneShot(jumpSound);
+
 
 
         }
+
+        if (Input.GetKey(KeyCode.DownArrow) && !isGrounded || Input.GetKey(KeyCode.S) && !isGrounded)
+        {
+            rb.AddForce(new Vector2(0,-characterJumpForce/175),ForceMode2D.Impulse);
+
+
+        }
+
 
 
 
