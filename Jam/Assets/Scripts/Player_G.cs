@@ -7,17 +7,18 @@ public class Player_G : MonoBehaviour
     public float Health = 100f;
 
     public Animator anim;
+    public Animator laserAnim;
 
     private void Update()
     {
         if (Health <= 0)
         {
-            SceneManager.LoadScene(7);
+            SceneManager.LoadScene(2);
         }
     }
-   /* private void BackToIdle()
+    private void BackToIdle()
     {
-        anim.SetBool("canAttack", false);
+        laserAnim.SetBool("canFire?", false);
     }
-   */
+   
 }
