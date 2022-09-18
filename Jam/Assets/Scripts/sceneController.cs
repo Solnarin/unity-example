@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 
 public class sceneController : MonoBehaviour
@@ -21,6 +23,7 @@ public class sceneController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
     }
+
 
     private void Update()
     {
@@ -85,9 +88,6 @@ public class sceneController : MonoBehaviour
             playerController.characterSoulAmount++;
             currentSceneSoulAmount++;
 
-            SceneManager.LoadScene(currentSceneSoulAmount);
-
-
             if (currentSceneSoulAmount == 1)
             {
                 playerController.canAnger = true;
@@ -143,6 +143,8 @@ public class sceneController : MonoBehaviour
 
 
             }
+            SceneManager.LoadScene(currentSceneSoulAmount);
+
 
 
 

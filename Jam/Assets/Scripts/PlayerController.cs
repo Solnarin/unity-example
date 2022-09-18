@@ -35,6 +35,9 @@ public class PlayerController : MonoBehaviour
 
 
 
+
+
+
     Animator anim;
     Rigidbody2D rb;
     public playerStatsController playerStatsController;
@@ -131,7 +134,7 @@ public class PlayerController : MonoBehaviour
     [Header("Anger")]
 
 
-    public GameObject breakableSoul ;
+    public GameObject breakableSoul;
     public bool canAnger;
 
     //---------------------------------------------------------------------------------------
@@ -174,6 +177,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         canAttack = true;
         DontDestroyOnLoad(gameObject);
+        playerStatsController = FindObjectOfType<playerStatsController>();
     }
 
 
@@ -217,7 +221,7 @@ public class PlayerController : MonoBehaviour
         else
             infoText.alpha = 0;
 
-        if (Input.GetKeyDown(KeyCode.Alpha7) && canArrogance && characterSoulAmount > 0) 
+        if (Input.GetKeyDown(KeyCode.Alpha7) && canArrogance && characterSoulAmount > 0)
         {
             StartCoroutine(ArroganceMode());
         }
@@ -242,17 +246,17 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(SleepMode());
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha6) && canGlutton && characterSoulAmount >0)
+        if (Input.GetKeyDown(KeyCode.Alpha6) && canGlutton && characterSoulAmount > 0)
         {
             StartCoroutine(GluttonMode());
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && canAnger && characterSoulAmount>0)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && canAnger && characterSoulAmount > 0)
         {
-            GameObject soul = Instantiate(breakableSoul,transform.position, Quaternion.identity);
+            GameObject soul = Instantiate(breakableSoul, transform.position, Quaternion.identity);
             if (isLookingRight)
             {
-                soul.GetComponent<Rigidbody2D>().AddForce(Vector2.right *1000);
+                soul.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 1000);
                 Destroy(soul.gameObject, 5f);
                 characterSoulAmount--;
             }
@@ -297,7 +301,7 @@ public class PlayerController : MonoBehaviour
 
         foreach (Collider2D col in attackedEnemies)
         {
-            if(col.CompareTag("Enemy") )
+            if (col.CompareTag("Enemy"))
             {
                 col.GetComponent<FlyingEnemyScript>().TakeHit(characterPower);
             }
@@ -420,7 +424,7 @@ public class PlayerController : MonoBehaviour
 
 
             float j = 0;
-            while (j <= lustEffectTime * 10 && closestEnemy!= null)
+            while (j <= lustEffectTime * 10 && closestEnemy != null)
             {
                 closestEnemy.transform.position
                     = Vector2.MoveTowards(closestEnemy.transform.position,
@@ -520,7 +524,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "void")
+        if (collision.gameObject.tag == "void")
         {
             playerStatsController.currentHealth = 0;
         }
@@ -537,7 +541,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.UpArrow) && canJump || Input.GetKeyDown(KeyCode.W) && canJump)
         {
-            rb.velocity = new Vector2(rb.velocity.x, characterJumpForce * 2/3);
+            rb.velocity = new Vector2(rb.velocity.x, characterJumpForce * 2 / 3);
             canJump = false;
 
 
@@ -589,21 +593,5 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(0, 180f, 0);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Soul"))
-        {
-            characterSoulAmount += 1;
-            Destroy(collision.gameObject);
-        }
-        else if (collision.gameObject.CompareTag("void"))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        else if (collision.gameObject.CompareTag("dialog")) 
-        {
-            GetComponent<DialogueTrigger>().TriggerDialogue();
-        }
-    }
 
-}   
+}
