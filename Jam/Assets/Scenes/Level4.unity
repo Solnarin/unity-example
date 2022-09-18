@@ -828,6 +828,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 833391346}
     - target: {fileID: 2221460559974945791, guid: 2a5756a2b654a5b4991dd41307bd0ab5, type: 3}
+      propertyPath: maxHealth
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 2221460559974945791, guid: 2a5756a2b654a5b4991dd41307bd0ab5, type: 3}
       propertyPath: chaseSpeed
       value: 4
       objectReference: {fileID: 0}
