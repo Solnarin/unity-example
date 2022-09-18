@@ -15,8 +15,9 @@ public class Player_G : MonoBehaviour
             SceneManager.LoadScene(7);
         }
     }
-    private void BackToIdle()
+   /* private void BackToIdle()
     {
         anim.SetBool("canAttack", false);
     }
+   */
 }
