@@ -499,8 +499,6 @@ public class PlayerController : MonoBehaviour
 
 
 
-
-
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -527,6 +525,10 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "void")
         {
             playerStatsController.currentHealth = 0;
+        }
+        else if(collision.gameObject.tag == "dialog")
+        {
+            GetComponent<DialogueTrigger>().TriggerDialogue();
         }
     }
 
