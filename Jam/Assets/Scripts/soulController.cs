@@ -9,6 +9,7 @@ public class soulController : MonoBehaviour
     private void Awake()
     {
         playerController = Object.FindObjectOfType<PlayerController>();
+
     }
 
 

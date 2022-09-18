@@ -12,7 +12,7 @@ public class Player_G : MonoBehaviour
     {
         if (Health <= 0)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(7);
         }
     }
     private void BackToIdle()

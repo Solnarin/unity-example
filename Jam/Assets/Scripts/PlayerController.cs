@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,6 +31,9 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayerMask;
     public float checkRadius;
     public bool canJump = true;
+
+
+
 
 
 
@@ -130,8 +134,8 @@ public class PlayerController : MonoBehaviour
     [Header("Anger")]
 
 
-    public GameObject breakableSoul ;
-
+    public GameObject breakableSoul;
+    public bool canAnger;
 
     //---------------------------------------------------------------------------------------
 
@@ -147,8 +151,12 @@ public class PlayerController : MonoBehaviour
 
     public soulController SoulCollecter;
 
+    public TextMeshProUGUI soulText;
+    public TextMeshProUGUI infoText;
 
-    private void Awake()
+
+    /*    
+     *    private void Awake()
     {
         canGlutton = true;
         canSleep = true;
@@ -159,11 +167,17 @@ public class PlayerController : MonoBehaviour
         canAttack = true;
         
     }
+     */
+
+
 
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        canAttack = true;
+        DontDestroyOnLoad(gameObject);
+        playerStatsController = FindObjectOfType<playerStatsController>();
     }
 
 
@@ -200,43 +214,49 @@ public class PlayerController : MonoBehaviour
 
 
 
+        if (Input.GetKey(KeyCode.Q))
+        {
+            infoText.alpha = 1;
+        }
+        else
+            infoText.alpha = 0;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && canArrogance)
+        if (Input.GetKeyDown(KeyCode.Alpha7) && canArrogance && characterSoulAmount > 0)
         {
             StartCoroutine(ArroganceMode());
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2) && canJealous)
+        if (Input.GetKeyDown(KeyCode.Alpha3) && canJealous && characterSoulAmount > 0)
         {
             StartCoroutine(JealousMode());
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3) && canLust)
+        if (Input.GetKeyDown(KeyCode.Alpha5) && canLust && characterSoulAmount > 0)
         {
             StartCoroutine(LustMode());
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha4) && canGreed)
+        if (Input.GetKeyDown(KeyCode.Alpha4) && canGreed && characterSoulAmount > 0)
         {
             StartCoroutine(GreedMode());
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha5) && canSleep)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && canSleep && characterSoulAmount > 0)
         {
             StartCoroutine(SleepMode());
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha6) && canGlutton)
+        if (Input.GetKeyDown(KeyCode.Alpha6) && canGlutton && characterSoulAmount > 0)
         {
             StartCoroutine(GluttonMode());
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha7) && characterSoulAmount>0)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && canAnger && characterSoulAmount > 0)
         {
-            GameObject soul = Instantiate(breakableSoul,transform.position, Quaternion.identity);
+            GameObject soul = Instantiate(breakableSoul, transform.position, Quaternion.identity);
             if (isLookingRight)
             {
-                soul.GetComponent<Rigidbody2D>().AddForce(Vector2.right *1000);
+                soul.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 1000);
                 Destroy(soul.gameObject, 5f);
                 characterSoulAmount--;
             }
@@ -259,6 +279,8 @@ public class PlayerController : MonoBehaviour
 
         Jump();
 
+        soulText.text = characterSoulAmount.ToString();
+
 
 
     }
@@ -279,7 +301,7 @@ public class PlayerController : MonoBehaviour
 
         foreach (Collider2D col in attackedEnemies)
         {
-            if(col.CompareTag("Enemy") )
+            if (col.CompareTag("Enemy"))
             {
                 col.GetComponent<FlyingEnemyScript>().TakeHit(characterPower);
             }
@@ -316,6 +338,7 @@ public class PlayerController : MonoBehaviour
         canSleep = false;
         isSleep = true;
 
+        characterSoulAmount--;
 
         anim.SetTrigger("playerSleep");
 
@@ -346,6 +369,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator GreedMode()
     {
         canGreed = false;
+        characterSoulAmount--;
 
         Collider2D[] colliderList = Physics2D.OverlapCircleAll(transform.position, greedRadius);
         foreach (Collider2D col in colliderList)
@@ -376,6 +400,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator LustMode()
     {
         canLust = false;
+        characterSoulAmount--;
 
 
         Collider2D[] colliderList = Physics2D.OverlapCircleAll(transform.position, lustRadius);
@@ -399,7 +424,7 @@ public class PlayerController : MonoBehaviour
 
 
             float j = 0;
-            while (j <= lustEffectTime * 10 && closestEnemy!= null)
+            while (j <= lustEffectTime * 10 && closestEnemy != null)
             {
                 closestEnemy.transform.position
                     = Vector2.MoveTowards(closestEnemy.transform.position,
@@ -424,6 +449,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator JealousMode()
     {
         canJealous = false;
+        characterSoulAmount--;
 
         Collider2D[] colliderList = Physics2D.OverlapCircleAll(transform.position, jealousRadius);
         foreach (Collider2D col in colliderList)
@@ -432,8 +458,8 @@ public class PlayerController : MonoBehaviour
             {
 
                 col.GetComponent<FlyingEnemyScript>().TakeHit(jealousAmount);
-
                 playerStatsController.Damage(-jealousAmount);
+
 
             }
 
@@ -449,6 +475,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator ArroganceMode()
     {
 
+        characterSoulAmount--;
         canArrogance = false;
         characterPower = characterArrogancePower;
         characterSpeed = characterArroganceSpeed;
@@ -491,6 +518,16 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
 
+
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "void")
+        {
+            playerStatsController.currentHealth = 0;
+        }
     }
 
 
@@ -504,7 +541,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.UpArrow) && canJump || Input.GetKeyDown(KeyCode.W) && canJump)
         {
-            rb.velocity = new Vector2(rb.velocity.x, characterJumpForce * 2/3);
+            rb.velocity = new Vector2(rb.velocity.x, characterJumpForce * 2 / 3);
             canJump = false;
 
 
@@ -530,11 +567,13 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (rb.velocity.y < 0)
+        if (rb.velocity.y < 0 && !isGrounded)
         {
             anim.SetBool("playerJumping", false);
             anim.SetBool("playerFalling", true);
         }
+
+
 
 
 
@@ -554,21 +593,5 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(0, 180f, 0);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Soul"))
-        {
-            characterSoulAmount += 1;
-            Destroy(collision.gameObject);
-        }
-        else if (collision.gameObject.CompareTag("void"))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        else if (collision.gameObject.CompareTag("dialog")) 
-        {
-            GetComponent<DialogueTrigger>().TriggerDialogue();
-        }
-    }
 
-}   
+}

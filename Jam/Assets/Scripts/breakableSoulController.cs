@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SubsystemsImplementation;
 
 public class breakableSoulController : MonoBehaviour
 {
-
-    public LayerMask breakableWallLayer;
 
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -16,6 +15,11 @@ public class breakableSoulController : MonoBehaviour
         {
             Destroy(gameObject);
             Destroy(collision.gameObject);
+        }
+
+        if(collision.gameObject.tag == "platform")
+        {
+            Destroy(gameObject);
         }
 
     }

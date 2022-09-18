@@ -31,8 +31,10 @@ public class FlyingEnemyScript : MonoBehaviour
     private GameObject player;
     private Animator anim;
 
+    public Transform hitBox;
 
 
+    public GameObject soul;
 
     void Start()
     {
@@ -41,6 +43,7 @@ public class FlyingEnemyScript : MonoBehaviour
         currentHealth = maxHealth;
         Healthbar.SetHealth(currentHealth, maxHealth);
         enemySpeed = chaseSpeed;
+        
     }
     
     // Update is called once per frame
@@ -63,22 +66,28 @@ public class FlyingEnemyScript : MonoBehaviour
             currentHealth = maxHealth;
 
         if (currentHealth <= 0)
+        {
+            Instantiate(soul,transform.position,Quaternion.identity);
+
             Destroy(gameObject);
+        }
 
     }
+
 
     private void Chase()
     {
            
         transform.position=Vector2.MoveTowards(transform.position, player.transform.position, enemySpeed * Time.deltaTime);
-        if(Vector2.Distance(transform.position,player.transform.position) <= 1.2)
+        if(Vector2.Distance(transform.position,player.transform.position) <= 0.2f)
         {
             enemySpeed = whileAttackingSpeed;
             anim.SetBool("canShoot", true);
+
             Collider2D[] attackPlayer = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRange);
-            foreach(Collider2D col in attackPlayer)
+            foreach (Collider2D col in attackPlayer)
             {
-                if (col.CompareTag("Player"))
+                if (col.CompareTag("Player") )
                 {
                     col.GetComponent<playerStatsController>().Damage(attackDamage);
                 }
