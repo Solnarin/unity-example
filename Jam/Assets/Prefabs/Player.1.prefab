@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1932506705241685878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6803448150726824332}
+  m_Layer: 7
+  m_Name: attackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6803448150726824332
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932506705241685878}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8868802247826255111}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8868802247826255115
 GameObject:
   m_ObjectHideFlags: 0
@@ -36,6 +67,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9119127544599448230}
+  - {fileID: 6803448150726824332}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -196,13 +228,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4bc1f683140d114880fc15a64054cd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 250
-  jumpForce: 17
+  characterSpeed: 0
+  characterPower: 0
+  characterJumpForce: 0
+  characterSoulAmount: 0
   groundCheck: {fileID: 9119127544599448230}
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
   checkRadius: 0.1
+  canJump: 1
+  playerStatsController: {fileID: 0}
+  characterNormalPower: 0
+  characterArrogancePower: 0
+  characterNormalSpeed: 0
+  characterArroganceSpeed: 0
+  characterNormalJumpForce: 0
+  characterArroganceJumpForce: 0
+  arroganceCooldown: 0
+  arroganceTime: 0
+  canArrogance: 0
+  canJealous: 0
+  jealousCooldown: 0
+  jealousAmount: 0
+  jealousRadius: 0
+  jealousDistanceDraw: 0
+  canLust: 0
+  lustForce: 0
+  lustEffectTime: 0
+  lustCooldown: 0
+  lustRadius: 0
+  lustDistanceDraw: 0
+  canGreed: 0
+  greedCooldown: 0
+  greedSoulPullSpeed: 0
+  greedRadius: 0
+  greedDistanceDraw: 0
+  canSleep: 0
+  sleepCooldown: 0
+  sleepHeal: 0
+  canGlutton: 0
+  gluttonPowerAmount: 0
+  gluttonCooldown: 0
+  breakableSoul: {fileID: 0}
+  canAttack: 0
+  attackCooldown: 0
+  attackPoint: {fileID: 6803448150726824332}
+  attackRange: 0
+  SoulCollecter: {fileID: 0}
 --- !u!1 &9119127544599448229
 GameObject:
   m_ObjectHideFlags: 0
