@@ -11,6 +11,7 @@ TagManager:
   - void
   - ladder
   - dialog
+  - breakableSoul
   layers:
   - Default
   - TransparentFX
@@ -50,4 +51,7 @@ TagManager:
     locked: 0
   - name: Arrows
     uniqueID: 3081773039
+    locked: 0
+  - name: Player
+    uniqueID: 1871693715
     locked: 0
