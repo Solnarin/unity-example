@@ -513,8 +513,6 @@ public class PlayerController : MonoBehaviour
 
 
 
-
-
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

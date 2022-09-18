@@ -8,16 +8,14 @@ public class Player_G : MonoBehaviour
 
     public Animator anim;
 
+
     private void Update()
     {
         if (Health <= 0)
         {
-            SceneManager.LoadScene(7);
+            SceneManager.LoadScene(2);
         }
     }
-   /* private void BackToIdle()
-    {
-        anim.SetBool("canAttack", false);
-    }
-   */
+    
+   
 }

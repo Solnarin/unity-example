@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 403624706584605285}
   - component: {fileID: 403624706584605289}
   - component: {fileID: 403624706584605290}
-  - component: {fileID: 4144547984815064500}
+  - component: {fileID: 5422179669190090100}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -121,7 +121,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -292,7 +292,7 @@ MonoBehaviour:
   swordHitSound: {fileID: 0}
   soulCollectedSound: {fileID: 0}
   soulThrowSound: {fileID: 0}
---- !u!114 &4144547984815064500
+--- !u!114 &5422179669190090100
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

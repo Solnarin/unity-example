@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 37393bae9cfc1c94e8997921bd1580b4
+guid: a94080dee964eb941a54473cb8dbe751
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bossDeathEffect_0
+      name: acgozluluk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -130,14 +130,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49ca5e88d4740c743a63cc326572657b
-      internalID: -238649784
+      spriteID: 9b4dd47a673333e4893a70a0783ceca4
+      internalID: -2046775132
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bossDeathEffect_1
+      name: acgozluluk_1
       rect:
         serializedVersion: 2
         x: 64
@@ -151,14 +151,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec44deca32e47ac46908c0d22f5f8a38
-      internalID: 585625577
+      spriteID: de749ba20562f01449b0077f96dfe940
+      internalID: 917964852
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bossDeathEffect_2
+      name: acgozluluk_2
       rect:
         serializedVersion: 2
         x: 128
@@ -172,8 +172,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a11fba68aa5654c42a5ef64af3bf4592
-      internalID: 2099347917
+      spriteID: 86719d80f1c5cef4993de7430cb50d98
+      internalID: 2083695114
       vertices: []
       indices: 
       edges: []
@@ -189,9 +189,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bossDeathEffect_0: -238649784
-      bossDeathEffect_1: 585625577
-      bossDeathEffect_2: 2099347917
+      acgozluluk_1: 917964852
+      acgozluluk_2: 2083695114
+      acgozluluk_0: -2046775132
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

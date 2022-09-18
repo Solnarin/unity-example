@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 37393bae9cfc1c94e8997921bd1580b4
+guid: 1093271d699ce954f89630897f073bdb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bossDeathEffect_0
+      name: Sprite-0009-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
+        width: 31
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49ca5e88d4740c743a63cc326572657b
-      internalID: -238649784
+      spriteID: e3596fc4419733446a485ef352f02bdc
+      internalID: 1337806361
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bossDeathEffect_1
+      name: Sprite-0009-Sheet_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 31
         y: 0
-        width: 64
-        height: 64
+        width: 31
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec44deca32e47ac46908c0d22f5f8a38
-      internalID: 585625577
+      spriteID: b69c10fe1755e17498b0be429faa5b83
+      internalID: -615621062
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bossDeathEffect_2
+      name: Sprite-0009-Sheet_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 62
         y: 0
-        width: 64
-        height: 64
+        width: 31
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,8 +172,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a11fba68aa5654c42a5ef64af3bf4592
-      internalID: 2099347917
+      spriteID: 5b030b7d940f1114facb0c4920fb9b11
+      internalID: 847812169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite-0009-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 0
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0478bef2c17f2dc40a96b75bb570c037
+      internalID: 1261155271
       vertices: []
       indices: 
       edges: []
@@ -189,9 +210,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bossDeathEffect_0: -238649784
-      bossDeathEffect_1: 585625577
-      bossDeathEffect_2: 2099347917
+      Sprite-0009-Sheet_1: -615621062
+      Sprite-0009-Sheet_3: 1261155271
+      Sprite-0009-Sheet_2: 847812169
+      Sprite-0009-Sheet_0: 1337806361
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

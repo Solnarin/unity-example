@@ -7,6 +7,7 @@ public class ButtonController : MonoBehaviour
     public int count;
     public KeyCode keyToPress;
     public Animator anim;
+    public Animator laserAnim;
 
     void Update()
     {
@@ -19,11 +20,12 @@ public class ButtonController : MonoBehaviour
         {
             PlayAttack();
         }
+
     }
 
     private void PlayAttack()
     {
         count = 0;
-        anim.SetBool("canAttack", true);
+        laserAnim.SetBool("canFire?", true);
     }
 }

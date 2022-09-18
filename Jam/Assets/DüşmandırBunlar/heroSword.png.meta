@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 37393bae9cfc1c94e8997921bd1580b4
+guid: e85471ba7f0b1884f98993082054c94e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bossDeathEffect_0
+      name: heroSword_0
       rect:
         serializedVersion: 2
         x: 0
@@ -130,14 +130,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49ca5e88d4740c743a63cc326572657b
-      internalID: -238649784
+      spriteID: e5f4c895d0c112a4d8e0fa0c02bbf323
+      internalID: 446732666
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bossDeathEffect_1
+      name: heroSword_1
       rect:
         serializedVersion: 2
         x: 64
@@ -151,29 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec44deca32e47ac46908c0d22f5f8a38
-      internalID: 585625577
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bossDeathEffect_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a11fba68aa5654c42a5ef64af3bf4592
-      internalID: 2099347917
+      spriteID: f070821b16f062440bcc9fdb72044df4
+      internalID: 761371813
       vertices: []
       indices: 
       edges: []
@@ -189,9 +168,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bossDeathEffect_0: -238649784
-      bossDeathEffect_1: 585625577
-      bossDeathEffect_2: 2099347917
+      heroSword_1: 761371813
+      heroSword_0: 446732666
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -12,7 +12,6 @@ TagManager:
   - ladder
   - dialog
   - breakableSoul
-  - Wall
   layers:
   - Default
   - TransparentFX
@@ -21,8 +20,8 @@ TagManager:
   - Water
   - UI
   - platform
-  - postprocessing
-  - no post
+  - 
+  - 
   - 
   - 
   - 
@@ -52,4 +51,7 @@ TagManager:
     locked: 0
   - name: Arrows
     uniqueID: 3081773039
+    locked: 0
+  - name: Player
+    uniqueID: 1871693715
     locked: 0

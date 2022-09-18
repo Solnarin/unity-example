@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 37393bae9cfc1c94e8997921bd1580b4
+guid: 4b7f418bf612b2547885f304508b7961
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bossDeathEffect_0
+      name: laserEffect_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
-        height: 64
+        x: 263
+        y: 6
+        width: 99
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49ca5e88d4740c743a63cc326572657b
-      internalID: -238649784
+      spriteID: bc4ebd4eb8caaac4c89ac6ca5f607036
+      internalID: -76626835
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bossDeathEffect_1
+      name: laserEffect_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 64
+        x: 135
+        y: 13
+        width: 43
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec44deca32e47ac46908c0d22f5f8a38
-      internalID: 585625577
+      spriteID: 83784fa7183e01741ae2e8c98d182c4c
+      internalID: -1035513460
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bossDeathEffect_2
+      name: laserEffect_0
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
+        x: 7
+        y: 17
+        width: 11
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,8 +172,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a11fba68aa5654c42a5ef64af3bf4592
-      internalID: 2099347917
+      spriteID: 8940783c9d918d44481ad9fb636a6fe2
+      internalID: -1293104029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laserEffect_3
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 1
+        width: 121
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 765d71d072214754291a33027b099f5d
+      internalID: 611620305
       vertices: []
       indices: 
       edges: []
@@ -189,9 +210,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bossDeathEffect_0: -238649784
-      bossDeathEffect_1: 585625577
-      bossDeathEffect_2: 2099347917
+      laserEffect_5: -1625991523
+      laserEffect_1: -1035513460
+      laserEffect_3: 611620305
+      laserEffect_0: -1293104029
+      laserEffect_2: -76626835
+      laserEffect_4: 672979174
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
