@@ -404,6 +404,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 842013062600527177, guid: 96b248fdcf3afd94e9245594e998424b, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5919525501772782793, guid: 96b248fdcf3afd94e9245594e998424b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -473,6 +477,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5919525501772782796, guid: 96b248fdcf3afd94e9245594e998424b, type: 3}
+      propertyPath: attackPoint
+      value: 
+      objectReference: {fileID: 5142330000528867962}
+    - target: {fileID: 5919525501772782796, guid: 96b248fdcf3afd94e9245594e998424b, type: 3}
       propertyPath: startingPoint
       value: 
       objectReference: {fileID: 0}
@@ -493,5 +501,10 @@ PrefabInstance:
 --- !u!4 &2221460559974945786 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5919525501772782793, guid: 96b248fdcf3afd94e9245594e998424b, type: 3}
+  m_PrefabInstance: {fileID: 5544590335890460467}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5142330000528867962 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 842013062600527177, guid: 96b248fdcf3afd94e9245594e998424b, type: 3}
   m_PrefabInstance: {fileID: 5544590335890460467}
   m_PrefabAsset: {fileID: 0}

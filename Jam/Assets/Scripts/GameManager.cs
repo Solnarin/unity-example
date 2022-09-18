@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
                 if(timer > 7)
                 {
                     theMusic.Play();
-                    Debug.Log("Playing");
                     timer -= 6;
                 }
                 else if(timer < 3)
@@ -59,13 +58,12 @@ public class GameManager : MonoBehaviour
 
     public void NoteHit()
     {
-        Debug.Log("OLDU");
-        boss.Health -= 5;
+        boss.Health -= 1;
     }
 
     public void NoteMissed()
     {
-        Debug.Log("BASAMADIN");
         player.Health -= 20;
+        Debug.Log("Miss");
     }
 }
