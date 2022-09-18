@@ -542,10 +542,6 @@ public class PlayerController : MonoBehaviour
             audioSource.PlayOneShot(deathSound);
 
         }
-        else if(collision.gameObject.tag == "dialog")
-        {
-            GetComponent<DialogueTrigger>().TriggerDialogue();
-        }
     }
 
 
