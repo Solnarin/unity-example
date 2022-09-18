@@ -69,5 +69,7 @@ public class DialogueManager : MonoBehaviour
     void EndDialogue()
     {
         animator.SetBool("isOpen", false);
+        Destroy(this.transform.parent.transform.parent.Find("fury"));
+       
     }
 }

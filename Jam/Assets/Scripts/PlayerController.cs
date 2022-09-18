@@ -513,8 +513,6 @@ public class PlayerController : MonoBehaviour
 
 
 
-
-
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -543,6 +541,10 @@ public class PlayerController : MonoBehaviour
             playerStatsController.currentHealth = 0;
             audioSource.PlayOneShot(deathSound);
 
+        }
+        else if(collision.gameObject.tag == "dialog")
+        {
+            GetComponent<DialogueTrigger>().TriggerDialogue();
         }
     }
 
