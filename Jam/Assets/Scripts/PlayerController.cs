@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -30,9 +30,6 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayerMask;
     public float checkRadius;
     public bool canJump = true;
-
-
-
 
 
 
@@ -557,5 +554,21 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(0, 180f, 0);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Soul"))
+        {
+            characterSoulAmount += 1;
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.CompareTag("void"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else if (collision.gameObject.CompareTag("dialog")) 
+        {
+            GetComponent<DialogueTrigger>().TriggerDialogue();
+        }
+    }
 
 }   

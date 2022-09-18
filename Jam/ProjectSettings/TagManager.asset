@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - void
   - ladder
+  - dialog
   layers:
   - Default
   - TransparentFX
