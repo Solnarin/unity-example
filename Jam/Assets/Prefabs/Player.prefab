@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 403624706584605285}
   - component: {fileID: 403624706584605289}
   - component: {fileID: 403624706584605290}
+  - component: {fileID: 5422179669190090100}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -231,10 +232,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4bc1f683140d114880fc15a64054cd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontal: 0
   characterSpeed: 250
   characterPower: 10
   characterJumpForce: 17
   characterSoulAmount: 0
+  isGrounded: 0
   groundCheck: {fileID: 797870054}
   groundLayerMask:
     serializedVersion: 2
@@ -274,8 +277,31 @@ MonoBehaviour:
   gluttonPowerAmount: 10
   gluttonCooldown: 30
   breakableSoul: {fileID: 8645177098974221350, guid: c69c9afb5521b1148b089c7d65b3efd8, type: 3}
+  canAnger: 0
   canAttack: 0
   attackCooldown: 0.65
   attackPoint: {fileID: 1355250217}
   attackRange: 1
   SoulCollecter: {fileID: 0}
+  soulText: {fileID: 0}
+  infoText: {fileID: 0}
+  audioSource: {fileID: 0}
+  jumpSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  swordMissSound: {fileID: 0}
+  swordHitSound: {fileID: 0}
+  soulCollectedSound: {fileID: 0}
+  soulThrowSound: {fileID: 0}
+--- !u!114 &5422179669190090100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403624706584605284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd16700e76d3f444b1bc5ffc3b96885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 403624706584605285}
