@@ -35,9 +35,6 @@ public class PlayerController : MonoBehaviour
 
 
 
-
-
-
     Animator anim;
     Rigidbody2D rb;
     public playerStatsController playerStatsController;
@@ -592,5 +589,21 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(0, 180f, 0);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Soul"))
+        {
+            characterSoulAmount += 1;
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.CompareTag("void"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else if (collision.gameObject.CompareTag("dialog")) 
+        {
+            GetComponent<DialogueTrigger>().TriggerDialogue();
+        }
+    }
 
 }   
